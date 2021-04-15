@@ -1,24 +1,9 @@
-import React, { useContext, useState } from 'react'
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  ActivityIndicator,
-} from 'react-native'
+import React from 'react'
+import { View, Dimensions } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
-import { Context } from '../Context'
 
 const LineGraph = ({ labelArray, dataArray }) => {
-  const [isLoading, setisLoading] = useState(true)
-
-  setTimeout(() => {
-    setisLoading(false)
-  }, 500)
-
-  return isLoading ? (
-    <ActivityIndicator size='large' />
-  ) : (
+  return (
     <View>
       <LineChart
         data={{
@@ -29,7 +14,7 @@ const LineGraph = ({ labelArray, dataArray }) => {
             },
           ],
         }}
-        width={Dimensions.get('window').width} // from react-native
+        width={Dimensions.get('window').width}
         height={220}
         yAxisSuffix=' MM'
         chartConfig={{
@@ -51,12 +36,5 @@ const LineGraph = ({ labelArray, dataArray }) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: 'black',
-  },
-})
 
 export default LineGraph

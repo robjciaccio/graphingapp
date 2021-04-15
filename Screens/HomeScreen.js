@@ -1,20 +1,30 @@
 import React, { useState, useContext } from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
-import { useEffect } from 'react/cjs/react.development'
+import { View, StyleSheet, Button, ActivityIndicator } from 'react-native'
 import BarChart from '../components/BarChart'
 import LineGraph from '../components/LineGraph'
-import StateButton from '../components/StateButton'
 import { Context } from '../Context'
 import { Picker } from '@react-native-picker/picker'
 
 const HomeScreen = ({ navigation }) => {
   const [lineGraph, setLineGraph] = useState(true)
-  const [isLoading, setIsLoading] = useState(true)
   const [switchMode, setSwitchMode] = useState(true)
   const [pickerMode, setPickerMode] = useState(false)
   const { popData, stateData } = useContext(Context)
+  const [isLoading, setIsLoading] = useState(true)
 
+  //   organise each array in preparation to be arranged
+  let labelArray = []
+  let dataArray = []
+  let statePopArray = []
+  let stateNameArray = []
+  let i = 0
+
+  // allow time for date to be fetched
   setTimeout(() => {
+    setIsLoading(false)
+  }, 500)
+  // organise fetched data with previously arranged arrays
+  if (!isLoading) {
     while (i < popData.length) {
       labelArray.push(popData[i].Year)
       dataArray.push(popData[i].Population.toString().slice(0, 3))
@@ -22,24 +32,11 @@ const HomeScreen = ({ navigation }) => {
       stateNameArray.push(stateData[i].State.slice(0, 8))
       i++
     }
-  }, 500)
-
-  //   organise each array for charting
-  let labelArray = []
-  let dataArray = []
-  let statePopArray = []
-  let stateNameArray = []
-  let i = 0
-
-  while (i < popData.length) {
-    labelArray.push(popData[i].Year)
-    dataArray.push(popData[i].Population.toString().slice(0, 3))
-    statePopArray.push(stateData[i].Population.toString().slice(0, 2))
-    stateNameArray.push(stateData[i].State.slice(0, 8))
-    i++
   }
 
-  return (
+  return isLoading ? (
+    <ActivityIndicator style={styles.screen} />
+  ) : (
     <View style={styles.screen}>
       {switchMode ? (
         <View>
