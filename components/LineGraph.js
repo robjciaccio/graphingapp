@@ -11,11 +11,10 @@ import { Context } from '../Context'
 
 const LineGraph = ({ labelArray, dataArray }) => {
   const [isLoading, setisLoading] = useState(true)
-  const { popData } = useContext(Context)
 
   setTimeout(() => {
     setisLoading(false)
-  }, 100)
+  }, 500)
 
   return isLoading ? (
     <ActivityIndicator size='large' />
@@ -23,16 +22,16 @@ const LineGraph = ({ labelArray, dataArray }) => {
     <View>
       <LineChart
         data={{
-          labels: labelArray,
+          labels: labelArray.reverse(),
           datasets: [
             {
-              data: dataArray,
+              data: dataArray.reverse(),
             },
           ],
         }}
         width={Dimensions.get('window').width} // from react-native
         height={220}
-        yAxisSuffix=' M'
+        yAxisSuffix=' MM'
         chartConfig={{
           backgroundColor: '#e26a00',
           backgroundGradientFrom: '#fb8c00',

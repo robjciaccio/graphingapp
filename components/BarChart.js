@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   StyleSheet,
   View,
@@ -6,13 +6,16 @@ import {
   Dimensions,
   ActivityIndicator,
 } from 'react-native'
+// import {Context} from '../Context'
 import { BarChart } from 'react-native-chart-kit'
 
 const BarGraph = ({ labelArray, dataArray }) => {
+  // const {labelArray, dataArray} = useContext(Context)
   const [isLoading, setisLoading] = useState(true)
+
   setTimeout(() => {
     setisLoading(false)
-  }, 100)
+  }, 500)
 
   const data = {
     labels: labelArray,
@@ -31,11 +34,12 @@ const BarGraph = ({ labelArray, dataArray }) => {
         data={data}
         width={Dimensions.get('window').width}
         height={220}
+        yAxisSuffix=' MM'
         chartConfig={{
           backgroundColor: '#e26a00',
           backgroundGradientFrom: '#fb8c00',
           backgroundGradientTo: '#ffa726',
-          decimalPlaces: 2, // optional, defaults to 2dp
+          decimalPlaces: 0, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           style: {
             borderRadius: 16,
