@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { View, StyleSheet, Button, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, Button, ActivityIndicator, Text } from 'react-native'
 import BarChart from '../components/BarChart'
 import LineGraph from '../components/LineGraph'
 import { Context } from '../Context'
@@ -40,6 +40,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.screen}>
       {switchMode ? (
         <View>
+          <Text style={styles.descText}>Us Population</Text>
           {lineGraph ? (
             <LineGraph labelArray={labelArray} dataArray={dataArray} />
           ) : (
@@ -52,6 +53,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       ) : (
         <View>
+          <Text style={styles.descText}>Most Populated Us States</Text>
           {lineGraph ? (
             <LineGraph labelArray={stateNameArray} dataArray={statePopArray} />
           ) : (
@@ -89,6 +91,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     justifyContent: 'center',
+  },
+  descText: {
+    color: 'white',
+    fontSize: 22,
   },
 })
 

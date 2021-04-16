@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import HomeStackScreen from './HomeStackScreen'
+import OtherStackScreen from './OtherStackScreen'
 
 const BottomNavBar = ({ route, navigation }) => {
   const Tab = createBottomTabNavigator()
@@ -16,6 +17,9 @@ const BottomNavBar = ({ route, navigation }) => {
 
             if (route.name === 'Home') {
               iconName = 'home-outline'
+            }
+            if (route.name === 'Other') {
+              iconName = 'american-football-outline'
             }
             return (
               <Ionicons
@@ -48,6 +52,7 @@ const BottomNavBar = ({ route, navigation }) => {
         }}
       >
         <Tab.Screen name='Home' component={HomeStackScreen} />
+        <Tab.Screen name='Other' component={OtherStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   )
